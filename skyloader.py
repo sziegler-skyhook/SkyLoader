@@ -1,7 +1,7 @@
-#! /bin/python3
 import argparse
 import os
 import webbrowser
+import emoji
 
 parser = argparse.ArgumentParser()
 
@@ -17,8 +17,32 @@ parser.add_argument('--loc', help='Enable location testing', action="store_true"
 parser.add_argument('--ip_loc', help='Enable IP location testing', action="store_true")
 parser.add_argument('--tiling', help='Enable tiling testing', action="store_true")
 parser.add_argument('--rgeo', help='Enable RGeo testing', action="store_true")
+parser.add_argument('--no_emoji', help="Disable emoji output on startup", action="store_true")
 
 args = parser.parse_args()
+
+# This garbage code is only here to entertain me because I'm tired of working on bugs
+if not args.no_emoji:
+    for i in range(37): print('\U000026C5', end = '')
+    print('\n')
+    for i in range(37): print('\U0001F99C', end = '')
+    print('\n')
+
+print('''
+███████ ██   ██ ██    ██ ██       ██████   █████  ██████  ███████ ██████
+██      ██  ██   ██  ██  ██      ██    ██ ██   ██ ██   ██ ██      ██   ██ 
+███████ █████     ████   ██      ██    ██ ███████ ██   ██ █████   ██████  
+     ██ ██  ██     ██    ██      ██    ██ ██   ██ ██   ██ ██      ██   ██ 
+███████ ██   ██    ██    ███████  ██████  ██   ██ ██████  ███████ ██   ██
+''')
+
+if not args.no_emoji:
+    print('\n')
+    for i in range(37): print('\U0001F680', end = '')
+    print('\n')
+    for i in range(37): print('\U0001F369', end = '')
+    print('\n')
+
 
 # Construct locust command base on Skyloader args
 if not args.health and not args.loc and not args.ip_loc and not args.tiling and not args.rgeo:

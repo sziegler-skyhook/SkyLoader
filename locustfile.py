@@ -1,10 +1,15 @@
-from locust import task, tag
+from locust import task, tag, events
 from locust.contrib.fasthttp import FastHttpUser
 from utils import RequestParser
 
 headers = {'Content-type': 'text/xml', 'User-Agent': 'SkyLoader/0.0.1' }
 
 class SkyLoader(FastHttpUser):
+
+    @events.init.add_listener
+    def on_locust_init(self):
+        self.request_parser = RequestParser(self, loc = True, ip_loc = True, tiling = True, rgeo = True)
+
     @tag('HealthCheck')
     @task
     def HealthCheck(self):
@@ -14,23 +19,7 @@ class SkyLoader(FastHttpUser):
     @tag('LocationRQ')
     @task
     def LocationRQ(self):
-        body = """<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.23' street-address-lookup='none'>
-                    <authentication version='2.2'>
-                        <key key='eJwNwckNACAIBMC3xZC4gMc-JWpTxt51Bgn5Q4a1dFgndxSK11BpahQti7JsuPcYUIv7AA-hCws' username ='SimonReplay'/>
-                    </authentication>
-                    <access-point>
-                        <mac>0014D1B1403A</mac>
-                        <ssid>TRENDnet733_2.4GHz_VRXT</ssid>
-                        <signal-strength>-83</signal-strength>
-                        <age>84</age>
-                    </access-point>
-                    <access-point>
-                        <mac>2C5D93520708</mac>
-                        <ssid>CableWiFi</ssid>
-                        <signal-strength>-89</signal-strength>
-                        <age>84</age>
-                    </access-point>
-                </LocationRQ>"""
+        body = self.request_parser.select_loc_rq()
     
         response = self.client.post(path="/wps2/location", headers=headers, data=body)
 
