@@ -21,7 +21,7 @@ parser.add_argument('--no_emoji', help="Disable emoji output on startup", action
 
 args = parser.parse_args()
 
-# This garbage code is only here to entertain me because I'm tired of working on bugs
+# This garbage banner code is only here to entertain me because I'm tired of working on bugs
 if not args.no_emoji:
     for i in range(37): print('\U000026C5', end = '')
     print('\n')
@@ -43,6 +43,7 @@ if not args.no_emoji:
     for i in range(37): print('\U0001F369', end = '')
     print('\n')
 
+# End garbage banner code
 
 # Construct locust command base on Skyloader args
 if not args.health and not args.loc and not args.ip_loc and not args.tiling and not args.rgeo:
