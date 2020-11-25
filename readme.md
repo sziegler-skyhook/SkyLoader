@@ -9,7 +9,7 @@ Skyloader is a load testing tool designed to generate production like traffic pa
 `pip install -r requirements.txt`
 
 ## Usage
-
+```
 usage: skyloader.py [-h] [--host HOST] [--users USERS] [--ramp RAMP] [--health] [--loc] [--ip_loc] [--tiling] [--rgeo]
 
 optional arguments:
@@ -22,4 +22,4 @@ optional arguments:
   --ip_loc       Enable IP location testing
   --tiling       Enable tiling testing
   --rgeo         Enable RGeo testing
-
+```
