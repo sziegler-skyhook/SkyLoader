@@ -1,5 +1,6 @@
 from locust import task, tag
 from locust.contrib.fasthttp import FastHttpUser
+from utils import RequestParser
 
 headers = {'Content-type': 'text/xml', 'User-Agent': 'SkyLoader/0.0.1' }
 
